@@ -1,7 +1,14 @@
 <template>
-  <nav class="nav"><SignIn class="sign-in"/></nav>
+  <div class="app">
+    <SignIn @closeForm="closeForm" class="sign-in" v-if="isOpen"/>
+    <nav class="nav">
+    <div><a href="#">Home</a></div>
+    <div><a href="#">About</a></div>
+    <div><a href="#" @click="isOpen = !isOpen">Sign In</a></div>
+  </nav>
   <div class="section section-1"></div>
   <div class="section section-2"></div>
+  </div>
 </template>
 
 <script>
@@ -11,17 +18,28 @@ export default {
   name: 'App',
   components: {
     SignIn
+  },
+  data () {
+    return {
+      isOpen: false
+    }
+  },
+  methods: {
+    closeForm () {
+      this.isOpen = false
+    }
   }
 }
 </script>
 
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
-$font-color: #fdfdfd;
+$font-color: #010101;
 *{
   margin: 0;
   font-family: 'Inter', sans-serif;
   color: $font-color;
+  font-size: 16px;
 }
 .nav{
   display: flex;
@@ -29,14 +47,11 @@ $font-color: #fdfdfd;
   align-items: center;
   height: 50px;
   background-color: #e9c46a;
-}
-.sign-in{
-  margin-right: 10px;
-  cursor: pointer;
-  transition: all ease-in-out 0.3s;
-  &:hover{
-    color:  darken($font-color,70%);
-    transition: all ease-in-out 0.3s;
+  div{
+    margin-right: 10px;
+    &:hover{
+      cursor: pointer;
+    }
   }
 }
 .section{
