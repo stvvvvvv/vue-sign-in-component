@@ -1,10 +1,12 @@
 <template>
   <div class="app">
-    <SignIn @closeForm="closeForm" class="sign-in" v-if="isOpen"/>
+    <transition name="fade">
+      <SignIn @closeFormSignIn="closeFormSignIn" :signInIsOpen="signInIsOpen" class="sign-in" v-if="signInIsOpen"/>
+    </transition>
     <nav class="nav">
     <div><a href="#">Home</a></div>
     <div><a href="#">About</a></div>
-    <div><a href="#" @click="isOpen = !isOpen">Sign In</a></div>
+    <div><a href="#" @click="signInIsOpen = !signInIsOpen">Sign In</a></div>
   </nav>
   <div class="section section-1"></div>
   <div class="section section-2"></div>
@@ -21,12 +23,12 @@ export default {
   },
   data () {
     return {
-      isOpen: false
+      signInIsOpen: false
     }
   },
   methods: {
-    closeForm () {
-      this.isOpen = false
+    closeFormSignIn () {
+      this.signInIsOpen = false
     }
   }
 }
@@ -43,7 +45,6 @@ $font-color: #010101;
 }
 .nav{
   display: flex;
-  justify-content: flex-end;
   align-items: center;
   height: 50px;
   background-color: #e9c46a;

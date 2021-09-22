@@ -1,50 +1,60 @@
 <template>
   <div class="sign-in__wrapper">
-    <div class="sign-in__container">
-      <h2>Sign into your account</h2>
-      <form class="sign-in__form" action="#" >
-        <div class="sign-in__input-container">
-          <label for="emailSignIn">
-            E-mail
-          </label>
-          <input
-            class="sign-in__input form__input"
-            id="emailSignIn"
-            name="email"
-            type="text"
-          />
+    <transition name="zoom">
+      <div class="sign-in__container fadeIn">
+        <h2>Sign into your account</h2>
+        <form class="sign-in__form" action="#" >
+          <div class="sign-in__input-container">
+            <label for="emailSignIn">
+              E-mail
+            </label>
+            <input
+              class="sign-in__input form__input"
+              id="emailSignIn"
+              name="email"
+              type="text"
+            />
+          </div>
+          <div class="sign-in__input-container">
+            <label for="passSignIn">
+              Password
+            </label>
+            <input
+              class="sign-in__input form__input"
+              id="passSignIn"
+              name="pass"
+              type="password"
+            />
+          </div>
+          <div class="sign-in__btn-container">
+            <button class="sign-in__btn form__btn">
+              Sign In
+            </button>
+          </div>
+          <p>Don't have an account? <a href="#">Sign Up</a></p>
+        </form>
+        <div class="sign-in__close close-btn" @click="closeFormSignIn()">
+          <img src="../assets/cancel.svg" alt="Close">
         </div>
-        <div class="sign-in__input-container">
-          <label for="passSignIn">
-            Password
-          </label>
-          <input
-            class="sign-in__input form__input"
-            id="passSignIn"
-            name="pass"
-            type="password"
-          />
-        </div>
-        <div class="sign-in__btn-container">
-          <button class="sign-in__btn form__btn">
-            Sign In
-          </button>
-        </div>
-        <p>Don't have an account? <a href="#">Sign Up</a></p>
-      </form>
-      <div class="sign-in__close close-btn" @click="closeForm()">
-        <img src="../assets/cancel.svg" alt="Close">
       </div>
-    </div>
+    </transition>
   </div>
 </template>
 
 <script>
 export default {
   name: 'SignIn',
+  props: {
+    signInIsOpen: {
+      type: Boolean,
+      default () {
+        return false
+      }
+    }
+  },
   methods: {
-    closeForm () {
-      this.$emit('closeForm')
+    closeFormSignIn () {
+      this.$emit('closeFormSignIn')
     }
   }
 }
@@ -75,6 +85,7 @@ export default {
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.6);
+    transition: 1s ease all;
   }
   &__container{
     @include center;
@@ -132,4 +143,28 @@ export default {
   height: 20px;
   cursor: pointer;
 }
+
+.fade-enter-from, .fade-leave-to{
+  transform: scale(0.8);
+  opacity: 0;
+}
+.fade-enter-active, .fade-leave-active{
+  border-radius: 5%;
+  transition: 1s ease all;
+}
+.fade-enter-to{
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.fadeIn {
+  animation-name: fadeIn;
+  animation-duration: 0.5s;
+  animation-delay: 0.3s;
+  animation-fill-mode: both;
+  }
+  @keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+  }
 </style>
