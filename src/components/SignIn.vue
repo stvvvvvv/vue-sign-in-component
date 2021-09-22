@@ -1,43 +1,94 @@
 <template>
   <div class="sign-in__wrapper">
-    <transition name="zoom">
-      <div class="sign-in__container fadeIn">
-        <h2>Sign into your account</h2>
-        <form class="sign-in__form" action="#" >
-          <div class="sign-in__input-container">
-            <label for="emailSignIn">
-              E-mail
-            </label>
-            <input
-              class="sign-in__input form__input"
-              id="emailSignIn"
-              name="email"
-              type="text"
-            />
-          </div>
-          <div class="sign-in__input-container">
-            <label for="passSignIn">
-              Password
-            </label>
-            <input
-              class="sign-in__input form__input"
-              id="passSignIn"
-              name="pass"
-              type="password"
-            />
-          </div>
-          <div class="sign-in__btn-container">
-            <button class="sign-in__btn form__btn">
-              Sign In
-            </button>
-          </div>
-          <p>Don't have an account? <a href="#">Sign Up</a></p>
-        </form>
-        <div class="sign-in__close close-btn" @click="closeFormSignIn()">
-          <img src="../assets/cancel.svg" alt="Close">
+    <div
+      class="sign-in__container fadeIn"
+      v-show="!signUp"
+    >
+      <h2>Sign into your account</h2>
+      <form class="sign-in__form" action="#">
+        <div class="sign-in__input-container">
+          <label for="emailSignIn"> E-mail </label>
+          <input
+            class="sign-in__input form__input"
+            id="emailSignIn"
+            name="email"
+            type="text"
+          />
         </div>
+        <div class="sign-in__input-container">
+          <label for="passSignIn"> Password </label>
+          <input
+            class="sign-in__input form__input"
+            id="passSignIn"
+            name="pass"
+            type="password"
+          />
+        </div>
+        <div class="sign-in__btn-container">
+          <button class="sign-in__btn form__btn">Sign In</button>
+        </div>
+        <p>
+          Don't have an account?
+          <span class="sign-in__link" @click="signUp = !signUp">Sign Up</span>
+        </p>
+      </form>
+      <div class="sign-in__close close-btn" @click="closeFormSignIn()">
+        <img src="../assets/cancel.svg" alt="Close" />
       </div>
-    </transition>
+    </div>
+    <div
+      class="sign-in__container fadeIn"
+      v-show="signUp"
+    >
+      <h2>Sign up to use our service</h2>
+      <form class="sign-in__form" action="#">
+        <div class="sign-in__input-container">
+          <label for="fullNameSignUp"> Full Name </label>
+          <input
+            class="sign-in__input form__input"
+            id="fullNameSignUp"
+            name="fullName"
+            type="text"
+          />
+        </div>
+        <div class="sign-in__input-container">
+          <label for="emailSignUp"> E-mail </label>
+          <input
+            class="sign-in__input form__input"
+            id="emailSignUp"
+            name="email"
+            type="text"
+          />
+        </div>
+        <div class="sign-in__input-container">
+          <label for="passSignUp"> Password </label>
+          <input
+            class="sign-in__input form__input"
+            id="passSignUp"
+            name="pass"
+            type="password"
+          />
+        </div>
+        <div class="sign-in__input-container">
+          <label for="passConfirmSignUp"> Password confirm </label>
+          <input
+            class="sign-in__input form__input"
+            id="passConfirmSignUp"
+            name="passConfirm"
+            type="password"
+          />
+        </div>
+        <div class="sign-in__btn-container">
+          <button class="sign-in__btn form__btn">Sign Up</button>
+        </div>
+      </form>
+      <div class="close-btn sign-in__prev" @click="this.signUp = !this.signUp">
+        <img src="../assets/prev.svg" alt="Prev">
+      </div>
+      <div class="sign-in__close close-btn" @click="closeFormSignIn()">
+        <img src="../assets/cancel.svg" alt="Close" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -52,6 +103,11 @@ export default {
       }
     }
   },
+  data () {
+    return {
+      signUp: false
+    }
+  },
   methods: {
     closeFormSignIn () {
       this.$emit('closeFormSignIn')
@@ -61,7 +117,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
+<style lang="scss">
 @mixin center($horizontal: true, $vertical: true) {
   position: absolute;
   @if ($horizontal and $vertical) {
@@ -77,8 +133,8 @@ export default {
   }
 }
 
-.sign-in{
-  &__wrapper{
+.sign-in {
+  &__wrapper {
     position: fixed;
     width: 100%;
     height: 100%;
@@ -87,55 +143,63 @@ export default {
     background-color: rgba(0, 0, 0, 0.6);
     transition: 1s ease all;
   }
-  &__container{
+  &__container {
     @include center;
     padding: 70px;
     background-color: #fff;
     border-radius: 20px;
+    text-align: center;
   }
-  &__input{
+  &__input {
     height: 25px;
-    &-container{
+    &-container {
       display: flex;
       flex-direction: column;
       text-align: center;
       margin-top: 20px;
     }
   }
-  &__btn{
+  &__btn {
     margin: 20px 0;
     width: 100%;
-    &-container{
+    &-container {
       display: flex;
       justify-content: center;
     }
   }
+  &__prev{
+    left: 20px;
+  }
+  &__link {
+    text-decoration: underline;
+    cursor: pointer;
+  }
 }
 
-.form__input{
+.form__input {
   padding: 5px;
   border: 1px solid #adb5bd;
   border-radius: 10px;
   outline: none;
-  &:focus{
+  &:focus {
     border: 1px solid #005ce6;
   }
 }
 
-.form__btn{
+.form__btn {
   padding: 10px;
   color: #fff;
   background-color: #005ce6;
   border-radius: 10px;
   outline: none;
   border: none;
-  &:hover{
+  &:hover {
     cursor: pointer;
-    background-color: darken(#005ce6, 10%)
+    background-color: darken(#005ce6, 10%);
   }
 }
 
-.close-btn{
+.close-btn {
   position: absolute;
   top: 20px;
   right: 20px;
@@ -144,27 +208,32 @@ export default {
   cursor: pointer;
 }
 
-.fade-enter-from, .fade-leave-to{
+.fade-enter-from,
+.fade-leave-to {
   transform: scale(0.8);
   opacity: 0;
 }
-.fade-enter-active, .fade-leave-active{
+.fade-enter-active,
+.fade-leave-active {
   border-radius: 5%;
   transition: 1s ease all;
 }
-.fade-enter-to{
+.fade-enter-to {
   transform: scale(1.1);
   opacity: 1;
 }
 
 .fadeIn {
   animation-name: fadeIn;
-  animation-duration: 0.5s;
-  animation-delay: 0.3s;
+  animation-duration: 1s;
   animation-fill-mode: both;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
   }
-  @keyframes fadeIn {
-  0% {opacity: 0;}
-  100% {opacity: 1;}
+  100% {
+    opacity: 1;
   }
+}
 </style>
