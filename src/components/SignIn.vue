@@ -2,7 +2,7 @@
   <div class="sign-in__wrapper">
     <div
       class="sign-in__container fadeIn"
-      v-show="!signUp"
+      v-show="!signUpShow"
     >
       <h2>Sign into your account</h2>
       <form class="sign-in__form" action="#">
@@ -13,6 +13,8 @@
             id="emailSignIn"
             name="email"
             type="text"
+            v-model="signIn.email"
+            @blur="v$.signIn.email.$touch"
           />
         </div>
         <div class="sign-in__input-container">
@@ -22,14 +24,16 @@
             id="passSignIn"
             name="pass"
             type="password"
+            v-model="signIn.pass"
+            @blur="v$.signIn.pass.$touch"
           />
         </div>
         <div class="sign-in__btn-container">
-          <button class="sign-in__btn form__btn">Sign In</button>
+          <button class="sign-in__btn form__btn" @click="submitSignIn">Sign In</button>
         </div>
         <p>
           Don't have an account?
-          <span class="sign-in__link" @click="signUp = !signUp">Sign Up</span>
+          <span class="sign-in__link" @click="signUpShow = !signUpShow">Sign Up</span>
         </p>
       </form>
       <div class="sign-in__close close-btn" @click="closeFormSignIn()">
@@ -38,7 +42,7 @@
     </div>
     <div
       class="sign-in__container fadeIn"
-      v-show="signUp"
+      v-show="signUpShow"
     >
       <h2>Sign up to use our service</h2>
       <form class="sign-in__form" action="#">
@@ -49,6 +53,8 @@
             id="fullNameSignUp"
             name="fullName"
             type="text"
+            v-model="signUp.fullName"
+            @blur="v$.signUp.fullName.$touch"
           />
         </div>
         <div class="sign-in__input-container">
@@ -58,6 +64,8 @@
             id="emailSignUp"
             name="email"
             type="text"
+            v-model="signUp.email"
+            @blur="v$.signUp.email.$touch"
           />
         </div>
         <div class="sign-in__input-container">
@@ -67,6 +75,8 @@
             id="passSignUp"
             name="pass"
             type="password"
+            v-model="signUp.pass"
+             @blur="v$.signUp.pass.$touch"
           />
         </div>
         <div class="sign-in__input-container">
@@ -76,13 +86,15 @@
             id="passConfirmSignUp"
             name="passConfirm"
             type="password"
+            v-model="signUp.passConfirm"
+            @blur="v$.signUp.passConfirm.$touch"
           />
         </div>
         <div class="sign-in__btn-container">
           <button class="sign-in__btn form__btn">Sign Up</button>
         </div>
       </form>
-      <div class="close-btn sign-in__prev" @click="this.signUp = !this.signUp">
+      <div class="close-btn sign-in__prev" @click="this.signUpShow = !this.signUpShow">
         <img src="../assets/prev.svg" alt="Prev">
       </div>
       <div class="sign-in__close close-btn" @click="closeFormSignIn()">
@@ -93,6 +105,9 @@
 </template>
 
 <script>
+import useVuelidate from '@vuelidate/core'
+import { required } from '@vuelidate/validators'
+
 export default {
   name: 'SignIn',
   props: {
@@ -105,12 +120,39 @@ export default {
   },
   data () {
     return {
-      signUp: false
+      v$: useVuelidate(),
+      signUpShow: false,
+      signIn: {
+        email: '',
+        pass: ''
+      },
+      signUp: {
+        fullName: '',
+        email: '',
+        pass: '',
+        passConfirm: ''
+      }
+    }
+  },
+  validations () {
+    return {
+      signIn: {
+        email: { required },
+        pass: { required }
+      }
     }
   },
   methods: {
     closeFormSignIn () {
       this.$emit('closeFormSignIn')
+    },
+    submitSignIn () {
+      this.v$.$validate()
+      if (this.v$.error) {
+        alert('Hi')
+      } else {
+        alert('Error')
+      }
     }
   }
 }
