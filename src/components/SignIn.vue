@@ -5,17 +5,26 @@
       v-show="!signUpShow"
     >
       <h2>Sign into your account</h2>
-      <form class="sign-in__form" action="#">
+      <!--===========================================-->
+      <!-- ========== Sign In ============ -->
+      <form class="sign-in__form" @submit.prevent="submitSignIn">
         <div class="sign-in__input-container">
           <label for="emailSignIn"> E-mail </label>
           <input
             class="sign-in__input form__input"
             id="emailSignIn"
             name="email"
-            type="text"
+            type="email"
+            autocomplete="on"
             v-model="signIn.email"
             @blur="v$.signIn.email.$touch"
           />
+          <span
+            class="sign-in__error"
+            v-if="v$.signIn.email.$error"
+          >
+            Enter correct email
+          </span>
         </div>
         <div class="sign-in__input-container">
           <label for="passSignIn"> Password </label>
@@ -24,18 +33,27 @@
             id="passSignIn"
             name="pass"
             type="password"
+            autocomplete="on"
             v-model="signIn.pass"
             @blur="v$.signIn.pass.$touch"
           />
+          <span
+            class="sign-in__error"
+            v-if="v$.signIn.pass.$error"
+          >
+            Enter correct password
+          </span>
         </div>
         <div class="sign-in__btn-container">
-          <button class="sign-in__btn form__btn" @click="submitSignIn">Sign In</button>
+          <button class="sign-in__btn form__btn" submit>Sign In</button>
         </div>
         <p>
           Don't have an account?
           <span class="sign-in__link" @click="signUpShow = !signUpShow">Sign Up</span>
         </p>
       </form>
+      <!-- ========== /Sign In ========== -->
+      <!--===========================================-->
       <div class="sign-in__close close-btn" @click="closeFormSignIn()">
         <img src="../assets/cancel.svg" alt="Close" />
       </div>
@@ -45,7 +63,9 @@
       v-show="signUpShow"
     >
       <h2>Sign up to use our service</h2>
-      <form class="sign-in__form" action="#">
+      <!--===========================================-->
+      <!-- ========== Sign Up ========== -->
+      <form class="sign-in__form" @submit.prevent="submitSignUp">
         <div class="sign-in__input-container">
           <label for="fullNameSignUp"> Full Name </label>
           <input
@@ -53,9 +73,16 @@
             id="fullNameSignUp"
             name="fullName"
             type="text"
+            autocomplete="on"
             v-model="signUp.fullName"
             @blur="v$.signUp.fullName.$touch"
           />
+          <span
+            class="sign-in__error"
+            v-if="v$.signUp.fullName.$error"
+          >
+            Enter correct Full name
+          </span>
         </div>
         <div class="sign-in__input-container">
           <label for="emailSignUp"> E-mail </label>
@@ -63,10 +90,17 @@
             class="sign-in__input form__input"
             id="emailSignUp"
             name="email"
-            type="text"
+            type="email"
+            autocomplete="on"
             v-model="signUp.email"
             @blur="v$.signUp.email.$touch"
           />
+          <span
+            class="sign-in__error"
+            v-if="v$.signUp.email.$error"
+          >
+            Enter correct email
+          </span>
         </div>
         <div class="sign-in__input-container">
           <label for="passSignUp"> Password </label>
@@ -75,9 +109,16 @@
             id="passSignUp"
             name="pass"
             type="password"
+            autocomplete="on"
             v-model="signUp.pass"
-             @blur="v$.signUp.pass.$touch"
+            @blur="v$.signUp.pass.$touch"
           />
+          <span
+            class="sign-in__error"
+            v-if="v$.signUp.pass.$error"
+          >
+            Enter correct password
+          </span>
         </div>
         <div class="sign-in__input-container">
           <label for="passConfirmSignUp"> Password confirm </label>
@@ -86,14 +127,23 @@
             id="passConfirmSignUp"
             name="passConfirm"
             type="password"
+            autocomplete="on"
             v-model="signUp.passConfirm"
             @blur="v$.signUp.passConfirm.$touch"
           />
+          <span
+            class="sign-in__error"
+            v-if="v$.signUp.passConfirm.$error"
+          >
+            Enter same password
+          </span>
         </div>
         <div class="sign-in__btn-container">
-          <button class="sign-in__btn form__btn">Sign Up</button>
+          <button class="sign-in__btn sign-up__btn form__btn" submit>Sign Up</button>
         </div>
       </form>
+      <!-- ========== /Sign Up ========== -->
+      <!--===========================================-->
       <div class="close-btn sign-in__prev" @click="this.signUpShow = !this.signUpShow">
         <img src="../assets/prev.svg" alt="Prev">
       </div>
@@ -106,7 +156,7 @@
 
 <script>
 import useVuelidate from '@vuelidate/core'
-import { required } from '@vuelidate/validators'
+import { required, email, minLength, alpha, sameAs } from '@vuelidate/validators'
 
 export default {
   name: 'SignIn',
@@ -137,8 +187,14 @@ export default {
   validations () {
     return {
       signIn: {
-        email: { required },
-        pass: { required }
+        email: { required, email },
+        pass: { required, minLength: minLength(8) }
+      },
+      signUp: {
+        fullName: { required, alpha, minLength: minLength(1) },
+        email: { required, email },
+        pass: { required, minLength: minLength(8) },
+        passConfirm: { required, sameAs: sameAs(this.signUp.pass) }
       }
     }
   },
@@ -147,11 +203,17 @@ export default {
       this.$emit('closeFormSignIn')
     },
     submitSignIn () {
-      this.v$.$validate()
-      if (this.v$.error) {
-        alert('Hi')
+      if (this.v$.signIn.email.$invalid && this.v$.signIn.pass.$invalid) {
+        console.log('Error')
       } else {
-        alert('Error')
+        console.log('No errors')
+      }
+    },
+    submitSignUp () {
+      if (this.v$.signUp.fullName.$invalid && this.v$.signUp.email.$invalid && this.v$.signUp.pass.$invalid && this.v$.signUp.passConfirm.$invalid) {
+        console.log('Error')
+      } else {
+        console.log('No errors')
       }
     }
   }
@@ -195,14 +257,25 @@ export default {
   &__input {
     height: 25px;
     &-container {
+      position: relative;
       display: flex;
       flex-direction: column;
       text-align: center;
-      margin-top: 20px;
+      margin-top: 35px;
     }
   }
+  &__error{
+    position: absolute;
+    width: 100%;
+    left:50%;
+    bottom: -16px;
+    transform:translateX(-50%);
+    font-size: 12px;
+    color: rgb(255, 1, 1);
+  }
   &__btn {
-    margin: 20px 0;
+    margin-top: 50px;
+    margin-bottom: 20px;
     width: 100%;
     &-container {
       display: flex;
@@ -216,6 +289,10 @@ export default {
     text-decoration: underline;
     cursor: pointer;
   }
+}
+.sign-up__btn{
+  margin-top: 50px;
+  margin-bottom: 0;
 }
 
 .form__input {
