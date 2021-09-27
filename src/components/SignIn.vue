@@ -12,6 +12,7 @@
           <label for="emailSignIn"> E-mail </label>
           <input
             class="sign-in__input form__input"
+            :class="{ 'form__input-error': v$.signIn.email.$error, 'form__input-valid': v$.signIn.email.$invalid  === false }"
             id="emailSignIn"
             name="email"
             type="email"
@@ -30,6 +31,7 @@
           <label for="passSignIn"> Password </label>
           <input
             class="sign-in__input form__input"
+            :class="{ 'form__input-error': v$.signIn.pass.$error, 'form__input-valid': v$.signIn.pass.$invalid  === false }"
             id="passSignIn"
             name="pass"
             type="password"
@@ -45,7 +47,7 @@
           </span>
         </div>
         <div class="sign-in__btn-container">
-          <button class="sign-in__btn form__btn" submit>Sign In</button>
+          <button class="sign-in__btn form__btn" :disabled="isSignInBtnDisabled" submit>Sign In</button>
         </div>
         <p>
           Don't have an account?
@@ -70,6 +72,7 @@
           <label for="fullNameSignUp"> Full Name </label>
           <input
             class="sign-in__input form__input"
+            :class="{ 'form__input-error': v$.signUp.fullName.$error, 'form__input-valid': v$.signUp.fullName.$invalid  === false }"
             id="fullNameSignUp"
             name="fullName"
             type="text"
@@ -88,6 +91,7 @@
           <label for="emailSignUp"> E-mail </label>
           <input
             class="sign-in__input form__input"
+            :class="{ 'form__input-error': v$.signUp.email.$error, 'form__input-valid': v$.signUp.email.$invalid  === false }"
             id="emailSignUp"
             name="email"
             type="email"
@@ -106,6 +110,7 @@
           <label for="passSignUp"> Password </label>
           <input
             class="sign-in__input form__input"
+            :class="{ 'form__input-error': v$.signUp.pass.$error, 'form__input-valid': v$.signUp.pass.$invalid  === false }"
             id="passSignUp"
             name="pass"
             type="password"
@@ -124,6 +129,7 @@
           <label for="passConfirmSignUp"> Password confirm </label>
           <input
             class="sign-in__input form__input"
+            :class="{ 'form__input-error': v$.signUp.passConfirm.$error, 'form__input-valid': v$.signUp.passConfirm.$invalid  === false }"
             id="passConfirmSignUp"
             name="passConfirm"
             type="password"
@@ -139,7 +145,7 @@
           </span>
         </div>
         <div class="sign-in__btn-container">
-          <button class="sign-in__btn sign-up__btn form__btn" submit>Sign Up</button>
+          <button class="sign-in__btn sign-up__btn form__btn" :disabled="isSignUpBtnDisabled" submit>Sign Up</button>
         </div>
       </form>
       <!-- ========== /Sign Up ========== -->
@@ -203,17 +209,33 @@ export default {
       this.$emit('closeFormSignIn')
     },
     submitSignIn () {
-      if (this.v$.signIn.email.$invalid && this.v$.signIn.pass.$invalid) {
+      if (this.v$.signIn.email.$invalid || this.v$.signIn.pass.$invalid) {
         console.log('Error')
       } else {
         console.log('No errors')
       }
     },
     submitSignUp () {
-      if (this.v$.signUp.fullName.$invalid && this.v$.signUp.email.$invalid && this.v$.signUp.pass.$invalid && this.v$.signUp.passConfirm.$invalid) {
+      if (this.v$.signUp.fullName.$invalid || this.v$.signUp.email.$invalid || this.v$.signUp.pass.$invalid || this.v$.signUp.passConfirm.$invalid) {
         console.log('Error')
       } else {
         console.log('No errors')
+      }
+    }
+  },
+  computed: {
+    isSignInBtnDisabled () {
+      if (this.v$.signIn.email.$invalid || this.v$.signIn.pass.$invalid) {
+        return true
+      } else {
+        return false
+      }
+    },
+    isSignUpBtnDisabled () {
+      if (this.v$.signUp.fullName.$invalid || this.v$.signUp.email.$invalid || this.v$.signUp.pass.$invalid || this.v$.signUp.passConfirm.$invalid) {
+        return true
+      } else {
+        return false
       }
     }
   }
@@ -303,6 +325,18 @@ export default {
   &:focus {
     border: 1px solid #005ce6;
   }
+  &-error{
+    border-color: red;
+    &:focus {
+      border-color: red;
+    }
+  }
+  &-valid {
+    border-color: green;
+    &:focus {
+      border-color: green;
+    }
+  }
 }
 
 .form__btn {
@@ -315,6 +349,11 @@ export default {
   &:hover {
     cursor: pointer;
     background-color: darken(#005ce6, 10%);
+    cursor: default;
+  }
+  &:disabled {
+    background-color: #edeff0;
+    color: #a6a6a6;
   }
 }
 
