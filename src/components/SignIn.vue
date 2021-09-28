@@ -9,10 +9,22 @@
       <!-- ========== Sign In ============ -->
       <form class="sign-in__form" @submit.prevent="submitSignIn">
         <div class="sign-in__input-container">
-          <label for="emailSignIn"> E-mail </label>
+          <label
+          for="emailSignIn"
+          class="form__label"
+          :class="{
+            'form__label-error': v$.signIn.email.$error,
+            'form__label-valid': v$.signIn.email.$invalid  === false
+          }"
+          >
+            E-mail
+          </label>
           <input
             class="sign-in__input form__input"
-            :class="{ 'form__input-error': v$.signIn.email.$error, 'form__input-valid': v$.signIn.email.$invalid  === false }"
+            :class="{
+              'form__input-error': v$.signIn.email.$error,
+              'form__input-valid': v$.signIn.email.$invalid  === false
+            }"
             id="emailSignIn"
             name="email"
             type="email"
@@ -28,10 +40,22 @@
           </span>
         </div>
         <div class="sign-in__input-container">
-          <label for="passSignIn"> Password </label>
+          <label
+          for="passSignIn"
+          class="form__label"
+          :class="{
+            'form__label-error': v$.signIn.pass.$error,
+            'form__label-valid': v$.signIn.pass.$invalid  === false
+          }"
+          >
+            Password
+          </label>
           <input
             class="sign-in__input form__input"
-            :class="{ 'form__input-error': v$.signIn.pass.$error, 'form__input-valid': v$.signIn.pass.$invalid  === false }"
+            :class="{
+              'form__input-error': v$.signIn.pass.$error,
+              'form__input-valid': v$.signIn.pass.$invalid  === false
+            }"
             id="passSignIn"
             name="pass"
             type="password"
@@ -69,10 +93,22 @@
       <!-- ========== Sign Up ========== -->
       <form class="sign-in__form" @submit.prevent="submitSignUp">
         <div class="sign-in__input-container">
-          <label for="fullNameSignUp"> Full Name </label>
+          <label
+            for="fullNameSignUp"
+            class="form__label"
+            :class="{
+              'form__label-error': v$.signUp.fullName.$error,
+              'form__label-valid': v$.signUp.fullName.$invalid  === false
+            }"
+            >
+              Full Name
+            </label>
           <input
             class="sign-in__input form__input"
-            :class="{ 'form__input-error': v$.signUp.fullName.$error, 'form__input-valid': v$.signUp.fullName.$invalid  === false }"
+            :class="{
+              'form__input-error': v$.signUp.fullName.$error,
+              'form__input-valid': v$.signUp.fullName.$invalid  === false
+            }"
             id="fullNameSignUp"
             name="fullName"
             type="text"
@@ -88,7 +124,16 @@
           </span>
         </div>
         <div class="sign-in__input-container">
-          <label for="emailSignUp"> E-mail </label>
+          <label
+            for="emailSignUp"
+            class="form__label"
+            :class="{
+              'form__label-error': v$.signUp.email.$error,
+              'form__label-valid': v$.signUp.email.$invalid  === false
+            }"
+          >
+            E-mail
+          </label>
           <input
             class="sign-in__input form__input"
             :class="{ 'form__input-error': v$.signUp.email.$error, 'form__input-valid': v$.signUp.email.$invalid  === false }"
@@ -107,10 +152,20 @@
           </span>
         </div>
         <div class="sign-in__input-container">
-          <label for="passSignUp"> Password </label>
+          <label
+          for="passSignUp"
+          class="form__label"
+          :class="{
+            'form__label-error': v$.signUp.pass.$error,
+            'form__label-valid': v$.signUp.pass.$invalid  === false
+          }"
+          > Password </label>
           <input
             class="sign-in__input form__input"
-            :class="{ 'form__input-error': v$.signUp.pass.$error, 'form__input-valid': v$.signUp.pass.$invalid  === false }"
+            :class="{
+              'form__input-error': v$.signUp.pass.$error,
+              'form__input-valid': v$.signUp.pass.$invalid  === false
+            }"
             id="passSignUp"
             name="pass"
             type="password"
@@ -126,10 +181,22 @@
           </span>
         </div>
         <div class="sign-in__input-container">
-          <label for="passConfirmSignUp"> Password confirm </label>
+          <label
+          for="passConfirmSignUp"
+          class="form__label"
+          :class="{
+            'form__label-error': v$.signUp.passConfirm.$error,
+            'form__label-valid': v$.signUp.passConfirm.$invalid  === false
+          }"
+          >
+            Password confirm
+          </label>
           <input
             class="sign-in__input form__input"
-            :class="{ 'form__input-error': v$.signUp.passConfirm.$error, 'form__input-valid': v$.signUp.passConfirm.$invalid  === false }"
+            :class="{
+              'form__input-error': v$.signUp.passConfirm.$error,
+              'form__input-valid': v$.signUp.passConfirm.$invalid  === false
+            }"
             id="passConfirmSignUp"
             name="passConfirm"
             type="password"
@@ -294,6 +361,7 @@ export default {
     transform:translateX(-50%);
     font-size: 12px;
     color: rgb(255, 1, 1);
+    transition: 0.35s ease-in-out all;
   }
   &__btn {
     margin-top: 50px;
@@ -316,12 +384,21 @@ export default {
   margin-top: 50px;
   margin-bottom: 0;
 }
-
+.form__label{
+  transition: 0.35s ease-in-out all;
+  &-error{
+    color: red;
+  }
+  &-valid{
+    color: green;
+  }
+}
 .form__input {
   padding: 5px;
   border: 1px solid #adb5bd;
   border-radius: 10px;
   outline: none;
+  transition: 0.35s ease-in-out all;
   &:focus {
     border: 1px solid #005ce6;
   }
@@ -343,6 +420,7 @@ export default {
   padding: 10px;
   color: #fff;
   background-color: #005ce6;
+  transition: 0.35s ease-in-out all;
   border-radius: 10px;
   outline: none;
   border: none;
