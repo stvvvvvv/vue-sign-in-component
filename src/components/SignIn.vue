@@ -19,6 +19,23 @@
           >
             E-mail
           </label>
+          <div class="sign-in__icon_container">
+            <div class="sign-in__icon">
+              <svg
+              class="sign-in__icon"
+              width="120"
+              height="162"
+              viewBox="0 0 120 162"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect width="120" height="162" fill="white"/>
+                <rect :class="{'form__input-error': v$.signIn.email.$error, 'form__input-valid': v$.signIn.email.$invalid  === false}" x="5" y="40" width="110" height="82" rx="5" stroke="black" stroke-width="10"/>
+                <line :class="{'form__input-error': v$.signIn.email.$error, 'form__input-valid': v$.signIn.email.$invalid  === false}" x1="13.0058" y1="43.0413" x2="59.0413" y2="77.9942" stroke="black" stroke-width="10" stroke-linecap="round"/>
+                <line :class="{'form__input-error': v$.signIn.email.$error, 'form__input-valid': v$.signIn.email.$invalid  === false}" x1="60.9587" y1="77.9942" x2="106.994" y2="43.0413" stroke="black" stroke-width="10" stroke-linecap="round"/>
+              </svg>
+            </div>
+          </div>
           <input
             class="sign-in__input form__input"
             :class="{
@@ -50,6 +67,27 @@
           >
             Password
           </label>
+          <div class="sign-in__icon_container">
+            <div class="sign-in__icon">
+              <svg
+              class="sign-in__icon"
+              width="120"
+              height="162"
+              viewBox="0 0 120 162"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect width="120" height="162" fill="white"/>
+                <rect :class="{'form__input-error': v$.signIn.pass.$error, 'form__input-valid': v$.signIn.pass.$invalid  === false}" x="5" y="67" width="110" height="90" rx="5" stroke="black" stroke-width="10"/>
+                <path :class="{'form__input-error': v$.signIn.pass.$error, 'form__input-valid': v$.signIn.pass.$invalid  === false}" d="M20 45C20 39.7626 21.0544 34.5737 23.1058 29.7288C25.1574 24.8836 28.1674 20.4739 31.9696 16.7544C35.7719 13.0346 40.292 10.0783 45.2743 8.05944C50.2568 6.04047 55.6007 5 61 5C66.3993 5 71.7432 6.04047 76.7257 8.05943C81.708 10.0783 86.2281 13.0346 90.0304 16.7544C93.8326 20.4739 96.8426 24.8836 98.8942 29.7288C100.946 34.5737 102 39.7626 102 45" stroke="black" stroke-width="10"/>
+                <line :class="{'form__input-error': v$.signIn.pass.$error, 'form__input-valid': v$.signIn.pass.$invalid  === false}" x1="20" y1="45" x2="20" y2="62" stroke="black" stroke-width="10"/>
+                <line :class="{'form__input-error': v$.signIn.pass.$error, 'form__input-valid': v$.signIn.pass.$invalid  === false}" x1="102" y1="45" x2="102" y2="62" stroke="black" stroke-width="10"/>
+                <circle :class="{'form__input-error-icon': v$.signIn.pass.$error, 'form__input-valid-icon': v$.signIn.pass.$invalid  === false}" cx="30" cy="112" r="10" fill="#010101"/>
+                <circle :class="{'form__input-error-icon': v$.signIn.pass.$error, 'form__input-valid-icon': v$.signIn.pass.$invalid  === false}" cx="60" cy="112" r="10" fill="#010101"/>
+                <circle :class="{'form__input-error-icon': v$.signIn.pass.$error, 'form__input-valid-icon': v$.signIn.pass.$invalid  === false}" cx="90" cy="112" r="10" fill="#010101"/>
+              </svg>
+            </div>
+          </div>
           <input
             class="sign-in__input form__input"
             :class="{
@@ -100,9 +138,27 @@
               'form__label-error': v$.signUp.fullName.$error,
               'form__label-valid': v$.signUp.fullName.$invalid  === false
             }"
-            >
-              Full Name
-            </label>
+          >
+            Full Name
+          </label>
+          <div class="sign-in__icon_container">
+            <div class="sign-in__icon">
+              <svg
+              class="sign-in__icon"
+              width="120"
+              height="162"
+              viewBox="0 0 120 162"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              >
+              <rect width="120" height="162" fill="white"/>
+              <circle :class="{'form__input-error': v$.signUp.fullName.$error, 'form__input-valid': v$.signUp.fullName.$invalid  === false}" cx="62" cy="32" r="25" stroke="black" stroke-width="10"/>
+              <path :class="{'form__input-error': v$.signUp.fullName.$error, 'form__input-valid': v$.signUp.fullName.$invalid  === false}" d="M22 105C22 99.7471 23.0346 94.5457 25.0448 89.6927C27.055 84.8396 30.0014 80.4301 33.7157 76.7157C37.4301 73.0014 41.8396 70.055 46.6927 68.0448C51.5457 66.0346 56.7471 65 62 65C67.2529 65 72.4543 66.0346 77.3073 68.0448C82.1604 70.055 86.5699 73.0014 90.2843 76.7157C93.9986 80.4301 96.945 84.8396 98.9552 89.6927C100.965 94.5457 102 99.7471 102 105" stroke="black" stroke-width="10"/>
+              <line :class="{'form__input-error': v$.signUp.fullName.$error, 'form__input-valid': v$.signUp.fullName.$invalid  === false}" x1="22" y1="105" x2="22" y2="162" stroke="black" stroke-width="10"/>
+              <line :class="{'form__input-error': v$.signUp.fullName.$error, 'form__input-valid': v$.signUp.fullName.$invalid  === false}" x1="102" y1="105" x2="102" y2="162" stroke="black" stroke-width="10"/>
+            </svg>
+            </div>
+          </div>
           <input
             class="sign-in__input form__input"
             :class="{
@@ -134,6 +190,23 @@
           >
             E-mail
           </label>
+          <div class="sign-in__icon_container">
+            <div class="sign-in__icon">
+              <svg
+              class="sign-in__icon"
+              width="120"
+              height="162"
+              viewBox="0 0 120 162"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect width="120" height="162" fill="white"/>
+                <rect :class="{'form__input-error': v$.signUp.email.$error, 'form__input-valid': v$.signUp.email.$invalid  === false}" x="5" y="40" width="110" height="82" rx="5" stroke="black" stroke-width="10"/>
+                <line :class="{'form__input-error': v$.signUp.email.$error, 'form__input-valid': v$.signUp.email.$invalid  === false}" x1="13.0058" y1="43.0413" x2="59.0413" y2="77.9942" stroke="black" stroke-width="10" stroke-linecap="round"/>
+                <line :class="{'form__input-error': v$.signUp.email.$error, 'form__input-valid': v$.signUp.email.$invalid  === false}" x1="60.9587" y1="77.9942" x2="106.994" y2="43.0413" stroke="black" stroke-width="10" stroke-linecap="round"/>
+              </svg>
+            </div>
+          </div>
           <input
             class="sign-in__input form__input"
             :class="{ 'form__input-error': v$.signUp.email.$error, 'form__input-valid': v$.signUp.email.$invalid  === false }"
@@ -160,6 +233,27 @@
             'form__label-valid': v$.signUp.pass.$invalid  === false
           }"
           > Password </label>
+          <div class="sign-in__icon_container">
+            <div class="sign-in__icon">
+              <svg
+              class="sign-in__icon"
+              width="120"
+              height="162"
+              viewBox="0 0 120 162"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect width="120" height="162" fill="white"/>
+                <rect :class="{'form__input-error': v$.signUp.pass.$error, 'form__input-valid': v$.signUp.pass.$invalid  === false}" x="5" y="67" width="110" height="90" rx="5" stroke="black" stroke-width="10"/>
+                <path :class="{'form__input-error': v$.signUp.pass.$error, 'form__input-valid': v$.signUp.pass.$invalid  === false}" d="M20 45C20 39.7626 21.0544 34.5737 23.1058 29.7288C25.1574 24.8836 28.1674 20.4739 31.9696 16.7544C35.7719 13.0346 40.292 10.0783 45.2743 8.05944C50.2568 6.04047 55.6007 5 61 5C66.3993 5 71.7432 6.04047 76.7257 8.05943C81.708 10.0783 86.2281 13.0346 90.0304 16.7544C93.8326 20.4739 96.8426 24.8836 98.8942 29.7288C100.946 34.5737 102 39.7626 102 45" stroke="black" stroke-width="10"/>
+                <line :class="{'form__input-error': v$.signUp.pass.$error, 'form__input-valid': v$.signUp.pass.$invalid  === false}" x1="20" y1="45" x2="20" y2="62" stroke="black" stroke-width="10"/>
+                <line :class="{'form__input-error': v$.signUp.pass.$error, 'form__input-valid': v$.signUp.pass.$invalid  === false}" x1="102" y1="45" x2="102" y2="62" stroke="black" stroke-width="10"/>
+                <circle :class="{'form__input-error-icon': v$.signUp.pass.$error, 'form__input-valid-icon': v$.signUp.pass.$invalid  === false}" cx="30" cy="112" r="10" fill="#010101"/>
+                <circle :class="{'form__input-error-icon': v$.signUp.pass.$error, 'form__input-valid-icon': v$.signUp.pass.$invalid  === false}" cx="60" cy="112" r="10" fill="#010101"/>
+                <circle :class="{'form__input-error-icon': v$.signUp.pass.$error, 'form__input-valid-icon': v$.signUp.pass.$invalid  === false}" cx="90" cy="112" r="10" fill="#010101"/>
+              </svg>
+            </div>
+          </div>
           <input
             class="sign-in__input form__input"
             :class="{
@@ -191,6 +285,26 @@
           >
             Password confirm
           </label>
+          <div class="sign-in__icon_container">
+            <div class="sign-in__icon">
+              <svg
+              class="sign-in__icon"
+              width="120"
+              height="162"
+              viewBox="0 0 120 162"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect width="120" height="162" fill="white"/>
+                <rect :class="{'form__input-error': v$.signUp.passConfirm.$error, 'form__input-valid': v$.signUp.passConfirm.$invalid  === false}" x="5" y="67" width="110" height="90" rx="5" stroke="black" stroke-width="10"/>
+                <path :class="{'form__input-error': v$.signUp.passConfirm.$error, 'form__input-valid': v$.signUp.passConfirm.$invalid  === false}" d="M20 45C20 39.7626 21.0544 34.5737 23.1058 29.7288C25.1574 24.8836 28.1674 20.4739 31.9696 16.7544C35.7719 13.0346 40.292 10.0783 45.2743 8.05944C50.2568 6.04047 55.6007 5 61 5C66.3993 5 71.7432 6.04047 76.7257 8.05943C81.708 10.0783 86.2281 13.0346 90.0304 16.7544C93.8326 20.4739 96.8426 24.8836 98.8942 29.7288C100.946 34.5737 102 39.7626 102 45" stroke="black" stroke-width="10"/>
+                <line :class="{'form__input-error': v$.signUp.passConfirm.$error, 'form__input-valid': v$.signUp.passConfirm.$invalid  === false}" x1="20" y1="45" x2="20" y2="62" stroke="black" stroke-width="10"/>
+                <line :class="{'form__input-error': v$.signUp.passConfirm.$error, 'form__input-valid': v$.signUp.passConfirm.$invalid  === false}" x1="102" y1="45" x2="102" y2="62" stroke="black" stroke-width="10"/>
+                <line :class="{'form__input-error': v$.signUp.passConfirm.$error, 'form__input-valid': v$.signUp.passConfirm.$invalid  === false}" x1="49.6989" y1="108.264" x2="57.9414" y2="124.92" stroke="black" stroke-width="10" stroke-linecap="round"/>
+                <line :class="{'form__input-error': v$.signUp.passConfirm.$error, 'form__input-valid': v$.signUp.passConfirm.$invalid  === false}" x1="58.1111" y1="125.186" x2="75.2564" y2="94.8889" stroke="black" stroke-width="10" stroke-linecap="round"/>
+              </svg>
+            </div>
+          </div>
           <input
             class="sign-in__input form__input"
             :class="{
@@ -353,6 +467,15 @@ export default {
       margin-top: 35px;
     }
   }
+  &__icon{
+    height: 20px;
+    width: auto;
+    &_container{
+      position: absolute;
+      top: 28px;
+      left: 9px;
+    }
+  }
   &__error{
     position: absolute;
     width: 100%;
@@ -395,6 +518,7 @@ export default {
 }
 .form__input {
   padding: 5px;
+  padding-left: 30px;
   border: 1px solid #adb5bd;
   border-radius: 10px;
   outline: none;
@@ -404,12 +528,26 @@ export default {
   }
   &-error{
     border-color: red;
+    stroke: red;
+    transition: 0.35s ease-in-out all;
+    &-icon{
+      stroke: red;
+      fill: red;
+      transition: 0.35s ease-in-out all;
+    }
     &:focus {
       border-color: red;
     }
   }
   &-valid {
     border-color: green;
+    stroke: green;
+    transition: 0.35s ease-in-out all;
+    &-icon{
+      stroke: green;
+      fill: green;
+      transition: 0.35s ease-in-out all;
+    }
     &:focus {
       border-color: green;
     }
