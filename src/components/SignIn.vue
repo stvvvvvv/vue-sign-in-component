@@ -519,7 +519,7 @@ export default {
 .form__input {
   padding: 5px;
   padding-left: 30px;
-  border: 1px solid #adb5bd;
+  border: 1px solid rgb(0, 0, 0);
   border-radius: 10px;
   outline: none;
   transition: 0.35s ease-in-out all;
